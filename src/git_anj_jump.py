@@ -110,9 +110,12 @@ def run_game():
 		
 		runningman.blitme()	
 		bricks.draw(screen)
-		textscore="Num Bricks: %d/%d" % (bj_settings.numpickedbricks , bj_settings.maxnumpickedbricks)
+		textbricks="Num Bricks: %d/%d" % (bj_settings.numpickedbricks , bj_settings.maxnumpickedbricks)
 		textscore="Num Lives: %d/%d   WINS=%d" % (bj_settings.maxlosses-bj_settings.losses , bj_settings.maxlosses, bj_settings.wins)
-		sb.set_box(bj_settings,  screen, textscore)
+		xyposition=20,10
+		sb.set_box(bj_settings,  screen, textscore, xyposition)
+		xyposition=20,40
+		sb.set_box(bj_settings,  screen, textbricks, xyposition)
 		pygame.display.flip()
 		clock.tick(50)
 		pygame.display.set_caption("GitHub Version DecBranch brickjump.py fps: " + str(clock.get_fps()))
