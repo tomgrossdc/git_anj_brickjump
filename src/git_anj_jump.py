@@ -61,24 +61,20 @@ def reset_game(bj_settings,screen,num_bricks):
 	return bricks
 
 def run_game():
+# First Time Initialization Only
 	pygame.init()
 	screen=pygame.display.set_mode((bj_settings.screen_width,bj_settings.screen_height))
 	pygame.display.set_caption("GitHub Version DecBranch brickjump.py")
 	clock = pygame.time.Clock()
-	#Lay a brick
-	brick = Brick(bj_settings,screen)
 	pickup = Pickup(bj_settings,screen)
-	print("pickup sprite",pickup.rect.x)
+	#print("pickup sprite",pickup.rect.x)
 	num_bricks=1
 	bricks=reset_game(bj_settings,screen,num_bricks)
 	
 	#
 	# Add a running man standing on top of first brick, with 2x forward speed
 	runningman=RunningMan(bj_settings,screen)
-	#collisions = pygame.sprite.spritecollide(runningman,bricks,False)
-	#for col in collisions :
-	#	runningman.rect.centerx = col.rect.centerx
-	#	runningman.rect.centery = col.rect.centery -(col.rect.height+runningman.rect.height)/2
+
 		
 	while True:
 		screen.fill(bj_settings.bg_color)
