@@ -33,8 +33,25 @@ from brick import Pickup
 import game_functions as gf
 from runningman import RunningMan
 import scoreboard as sb
+from levels import ReadLevels
 
-bj_settings=Settings()
+
+
+def startup_game():
+# First Time Initialization Only
+	bj_settings=Settings()
+	allLevels=ReadLevels(bj_settings)
+	bj_settings.levelnum=0
+	bj_settings.column_heights=allLevels[bj_settings.levelnum].column_heights
+	bj_settings.column_num =-1
+	bj_settings.maxnumpickedbricks=allLevels[bj_settings.levelnum].maxnumpickedbricks
+	pygame.init()
+	screen=pygame.display.set_mode((bj_settings.screen_width,bj_settings.screen_height))
+	pygame.display.set_caption("GitHub Version DecBranch brickjump.py")
+	clock = pygame.time.Clock()
+	pickup = Pickup(bj_settings,screen)
+	#print("pickup sprite",pickup.rect.x)
+	return bj_settings,allLevels, screen, clock, pickup
 
 def reset_game(bj_settings,screen,num_bricks):
 	
@@ -61,13 +78,9 @@ def reset_game(bj_settings,screen,num_bricks):
 	return bricks
 
 def run_game():
-# First Time Initialization Only
-	pygame.init()
-	screen=pygame.display.set_mode((bj_settings.screen_width,bj_settings.screen_height))
-	pygame.display.set_caption("GitHub Version DecBranch brickjump.py")
-	clock = pygame.time.Clock()
-	pickup = Pickup(bj_settings,screen)
-	#print("pickup sprite",pickup.rect.x)
+
+	[bj_settings, allLevels, screen, clock, pickup] = startup_game()
+
 	num_bricks=1
 	bricks=reset_game(bj_settings,screen,num_bricks)
 	
@@ -90,7 +103,14 @@ def run_game():
 		if runningman.rect.centerx>(bj_settings.screen_width-2*bj_settings.brick_width): 
 			Winner=True
 			bj_settings.wins+=1
+			bj_settings.levelnum+=1
+			bj_settings.levelnum=min(bj_settings.levelnum,len(allLevels)-1)
+			print(bj_settings.levelnum," len allLevels-1 ",len(allLevels)-1)
 		if ReStartOnR or Loser or Winner:
+# Start a new run. Initialize scores and bricks
+			bj_settings.column_heights=allLevels[bj_settings.levelnum].column_heights
+			bj_settings.maxnumpickedbricks=allLevels[bj_settings.levelnum].maxnumpickedbricks
+			bj_settings.column_num =-1
 			bricks=reset_game(bj_settings,screen,num_bricks)
 			runningman.rect.centerx = 2*bj_settings.brick_width
 			runningman.rect.centery = bj_settings.screen_height-3*runningman.rect.height
@@ -106,7 +126,7 @@ def run_game():
 		
 		runningman.blitme()	
 		bricks.draw(screen)
-		textbricks="Num Bricks: %d/%d" % (bj_settings.numpickedbricks , bj_settings.maxnumpickedbricks)
+		textbricks="%s:    Num Bricks: %d/%d" % (allLevels[bj_settings.levelnum].title, bj_settings.numpickedbricks , bj_settings.maxnumpickedbricks)
 		textscore="Num Lives: %d/%d   WINS=%d" % (bj_settings.maxlosses-bj_settings.losses , bj_settings.maxlosses, bj_settings.wins)
 		xyposition=20,10
 		sb.set_box(bj_settings,  screen, textscore, xyposition)

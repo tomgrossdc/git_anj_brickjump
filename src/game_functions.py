@@ -111,6 +111,9 @@ def check_keydown_events(event, bj_settings, screen, brick):
 		sys.exit()
 	elif event.key == pygame.K_r:
 		KeyDown=True
+	elif event.key == pygame.K_p:
+		# Pause for 2 minutes to look at puzzle board for design purposes
+		sleep(10)
 	return KeyDown
 		
 

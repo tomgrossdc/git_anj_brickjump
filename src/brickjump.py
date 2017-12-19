@@ -51,7 +51,7 @@ for level_dict in level_data:
     AllLevels.append(lvl)
 
 
-print(AllLevels)
+print(AllLevels[2].title)
 
 pygame.display.flip()
 time.sleep(5)

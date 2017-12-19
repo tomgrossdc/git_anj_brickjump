@@ -37,7 +37,7 @@ class Settings():
 		self.numpickedbricks=0
 		self.maxnumpickedbricks=6
 		self.losses=0
-		self.maxlosses=2
+		self.maxlosses=7
 		self.wins=0
 
 
