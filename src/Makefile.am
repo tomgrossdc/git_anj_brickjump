@@ -16,4 +16,5 @@ git_anj_jump_PYTHON = \
 	levels.py \
 	runningman.py \
 	scoreboard.py \
-	settings.py
+	settings.py \
+	finishline.py

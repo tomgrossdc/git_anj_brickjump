@@ -34,6 +34,7 @@ import game_functions as gf
 from runningman import RunningMan
 import scoreboard as sb
 from levels import ReadLevels
+from finishline import Finish_Line
 
 
 
@@ -75,6 +76,8 @@ def reset_game(bj_settings,screen,num_bricks):
 		#bricks.draw(screen)
 		#pygame.display.flip()
 		#time.sleep(.003)
+
+		
 	return bricks
 
 def run_game():
@@ -86,6 +89,9 @@ def run_game():
 	
 	#
 	# Add a running man standing on top of first brick, with 2x forward speed
+	for i in range((bj_settings.screen_width-2*bj_settings.brick_width )/bj_settings.brick_speed_factor) :
+				bricks.update()
+				gf.update_columns(bj_settings,screen,bricks,num_bricks)
 	runningman=RunningMan(bj_settings,screen)
 
 		
@@ -100,7 +106,7 @@ def run_game():
 			if bj_settings.losses==bj_settings.maxlosses :
 				print(" You Lost")
 				sys.exit()
-		if runningman.rect.centerx>(bj_settings.screen_width-2*bj_settings.brick_width): 
+		if runningman.rect.centerx>(bj_settings.finish_x): 
 			Winner=True
 			bj_settings.wins+=1
 			bj_settings.levelnum+=1
@@ -112,6 +118,9 @@ def run_game():
 			bj_settings.maxnumpickedbricks=allLevels[bj_settings.levelnum].maxnumpickedbricks
 			bj_settings.column_num =-1
 			bricks=reset_game(bj_settings,screen,num_bricks)
+			for i in range((bj_settings.screen_width-2*bj_settings.brick_width )/bj_settings.brick_speed_factor) :
+				bricks.update()
+				gf.update_columns(bj_settings,screen,bricks,num_bricks)
 			runningman.rect.centerx = 2*bj_settings.brick_width
 			runningman.rect.centery = bj_settings.screen_height-3*runningman.rect.height
 			Winner=False
@@ -124,8 +133,11 @@ def run_game():
 		runningman.update(bj_settings,bricks)
 		gf.update_columns(bj_settings,screen,bricks,num_bricks)
 		
-		runningman.blitme()	
+		finish=Finish_Line(bj_settings)
+		finish.display(bj_settings,screen)
 		bricks.draw(screen)
+		runningman.blitme()	
+		
 		textbricks="%s:    Num Bricks: %d/%d" % (allLevels[bj_settings.levelnum].title, bj_settings.numpickedbricks , bj_settings.maxnumpickedbricks)
 		textscore="Num Lives: %d/%d   WINS=%d" % (bj_settings.maxlosses-bj_settings.losses , bj_settings.maxlosses, bj_settings.wins)
 		xyposition=20,10

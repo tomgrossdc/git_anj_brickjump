@@ -39,7 +39,8 @@ class Settings():
 		self.losses=0
 		self.maxlosses=7
 		self.wins=0
-
+		self.finish_x=int(0.9*self.screen_width)
+		
 
 
 	
