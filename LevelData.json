@@ -1,0 +1,37 @@
+[
+    {
+        "Level Name":"Beginning Level 1",
+        "column_hieghts": "1,2,1,1,1,2,2,1,2,1,2,2,4,3,4,5,1,1,1,1,1,1,10",
+        "maxpickedbricks":"6"
+    },
+    {
+        "Level Name":"Second Level 2",
+        "column_hieghts": "2,2,2,2,2,2,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"6"
+    },
+    {
+        "Level Name":"Getting Tougher Level 3",
+        "column_hieghts": "2,6,3,2,3,3,3,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"4"
+    },
+    {
+        "Level Name":"Captain Level 4",
+        "column_hieghts": "2,3,4,2,4,4,4,2,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"4"
+    },
+    {
+        "Level Name":"Pro-Climber Level 5",
+        "column_hieghts": "2,3,4,5,2,5,5,5,2,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"3"
+    },
+    {
+        "Level Name":"Really Sumptin Level 6",
+        "column_hieghts": "1,2,2,2,2,2,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"3"
+    },
+    {
+        "Level Name":"Very Last Level",
+        "column_hieghts": "1,2,3,2,1,2,1,2,2,6,5,4,3,4,5,6,1,2,4,4,5,10",
+        "maxpickedbricks":"2"
+    }
+]
